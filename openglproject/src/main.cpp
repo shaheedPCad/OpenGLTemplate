@@ -6,6 +6,12 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
+void processInput(GLFWwindow* window) {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
+	}
+}
+
 int main() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -29,9 +35,17 @@ int main() {
 	glViewport(0, 0, 800, 600);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+	// render loop
 	while (!glfwWindowShouldClose(window)) {
-		glfwSwapBuffers(window);
+		// input
+		processInput(window);
+
+		// rendering commands here
+
+
+		// check and call events and swap the buffers
 		glfwPollEvents();
+		glfwSwapBuffers(window);
 	}
 
 	glfwTerminate();
